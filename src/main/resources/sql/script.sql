@@ -14,4 +14,4 @@ create table tasks(
     dueDate date not null,
     isCompleted boolean default false not null,
     foreign key (email) references user(email) on delete cascade on update cascade
-)
+);
