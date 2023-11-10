@@ -13,8 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.todo.dto.LoginDto;
+import lk.ijse.todo.model.LoginModel;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginFormController {
     @FXML
@@ -23,12 +26,15 @@ public class LoginFormController {
     private TextField txtPassword;
     @FXML
     private AnchorPane root;
+    private LoginModel model = new LoginModel();
 
-    public void btnLoginOnAction(ActionEvent actionEvent) throws IOException {
+    public void btnLoginOnAction(ActionEvent actionEvent) throws IOException, SQLException {
         String userName = txtUserName.getText();
         String pw = txtPassword.getText();
 
-        //after login success, system should navigate to the dashboard
+        var dto = new LoginDto(userName, pw);
+        LoginDto isLogin = model.login(dto);
+
         navigateToMainWindow();
     }
 

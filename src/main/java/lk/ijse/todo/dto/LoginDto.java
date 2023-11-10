@@ -3,12 +3,11 @@ package lk.ijse.todo.dto;
 import lombok.*;
 
 @Getter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @Setter
-public class SignUpDto {
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class LoginDto {
     private String username;
-    private String email;
     private String password;
 }
