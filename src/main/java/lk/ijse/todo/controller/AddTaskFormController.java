@@ -11,7 +11,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import lk.ijse.todo.dto.TaskDto;
-import lk.ijse.todo.model.TaskModel;
+import lk.ijse.todo.model.Task;
 
 public class AddTaskFormController {
     @FXML
@@ -32,7 +32,7 @@ public class AddTaskFormController {
         var dto = new TaskDto(id, description, date);
 
         try {
-            new TaskModel().addTask(dto);
+            new Task().add(dto);
             clearfields();
         } catch (Exception e) {
             e.printStackTrace();

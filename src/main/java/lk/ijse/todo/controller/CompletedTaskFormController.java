@@ -8,10 +8,12 @@ package lk.ijse.todo.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.todo.dto.tm.CompleteTm;
+import lk.ijse.todo.dto.tm.DueTm;
 
 public class CompletedTaskFormController {
     @FXML
@@ -43,13 +45,14 @@ public class CompletedTaskFormController {
         obList.add(new CompleteTm("Service vehicle", "2022-12-24"));
 
         for (int i = 0; i < obList.size(); i++) {
-            // reason for using a for loop here is to add event handlers to the buttons in the table
+            int finalI = i;
             obList.get(i).getBtnDelete().setOnAction(event -> {
-                // here you need to write the code to delete the task from FX table and database table as well.
+                CompleteTm.class.cast(obList.get(finalI)).getBtnDelete().setOnAction(event1 -> {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
+                });
                 System.out.printf("Delete button clicked!");
             });
         }
-
         tblComplete.setItems(obList);
     }
 
