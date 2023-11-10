@@ -10,11 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.todo.dto.LoginDto;
-import lk.ijse.todo.model.LoginModel;
+import lk.ijse.todo.model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,16 +26,20 @@ public class LoginFormController {
     private TextField txtPassword;
     @FXML
     private AnchorPane root;
-    private LoginModel model = new LoginModel();
+    private User model = new User();
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws IOException, SQLException {
-        String userName = txtUserName.getText();
-        String pw = txtPassword.getText();
+        String username = txtUserName.getText();
+        String password = txtPassword.getText();
 
-        var dto = new LoginDto(userName, pw);
-        LoginDto isLogin = model.login(dto);
-
-        navigateToMainWindow();
+        //after login success, system should navigate to the dashboard
+        boolean isValid = User.check(username,password);
+        if(isValid) {
+            new Alert(Alert.AlertType.CONFIRMATION,"done").show();
+            navigateToMainWindow();
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Incorrect User name or Password !!!").show();
+        }
     }
 
     private void navigateToMainWindow() throws IOException {

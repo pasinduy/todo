@@ -56,7 +56,7 @@ public class DueTaskFormController {
     private void loadDueTasks() throws SQLException {
         ObservableList<DueTm> obList = FXCollections.observableArrayList();
 
-        // reason for using a for loop here is to add event handlers to the buttons in the table
+
         for (int i = 0; i < obList.size(); i++) {
             int finalI1 = i;
             obList.get(i).getBtnComplete().setOnAction(event -> {

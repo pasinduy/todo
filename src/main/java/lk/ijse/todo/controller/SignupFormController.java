@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.todo.dto.SignUpDto;
-import lk.ijse.todo.model.SignUpModel;
+import lk.ijse.todo.model.User;
 
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ public class SignupFormController {
     @FXML
     private TextField txtUserName;
 
-    private SignUpModel model = new SignUpModel();
+    private User model = new User();
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) {
@@ -44,7 +44,7 @@ public class SignupFormController {
 
         var dto = new SignUpDto(email, username, password);
         try {
-            boolean isSaved = model.registerUser(dto);
+            boolean isSaved = User.add(dto.getEmail(), dto.getUsername(), dto.getPassword());
 
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
