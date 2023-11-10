@@ -8,10 +8,12 @@ package lk.ijse.todo.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.todo.dto.TaskDto;
 import lk.ijse.todo.dto.tm.DueTm;
 import lk.ijse.todo.model.Task;
 
@@ -51,23 +53,26 @@ public class DueTaskFormController {
         colDelete.setCellValueFactory(new PropertyValueFactory<>("btnDelete"));
     }
 
-    private ObservableList<DueTm> loadDueTasks() throws SQLException {
+    private void loadDueTasks() throws SQLException {
         ObservableList<DueTm> obList = FXCollections.observableArrayList();
 
         // reason for using a for loop here is to add event handlers to the buttons in the table
         for (int i = 0; i < obList.size(); i++) {
+            int finalI1 = i;
             obList.get(i).getBtnComplete().setOnAction(event -> {
-                // here you need to write the code to mark the task as complete on database table
-                System.out.println("Complete button clicked");
+                TaskDto.class.cast(obList.get(finalI1)).getBtnComplete().setOnAction(event1 -> {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
+                });
             });
 
+            int finalI = i;
             obList.get(i).getBtnDelete().setOnAction(event -> {
-                // here you need to write the code to delete the task from FX table and database table as well.
-                System.out.println("Delete button clicked");
+                TaskDto.class.cast(obList.get(finalI)).getBtnDelete().setOnAction(event1 -> {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?");
+                });
             });
         }
         tblDue.setItems(obList);
-        return obList;
     }
 
 }
